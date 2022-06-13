@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text,TextInput, View} from 'react-native';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { ActivityIndicator } from 'react-native-web';
+import { ActivityIndicator } from 'react-native';
 import { Weather } from './components/weather';
 import { SearchBar } from './components/searchbar';
 
@@ -41,7 +41,8 @@ export default function App() {
   if(!loaded){
     return(
       <View>
-        <ActivityIndicator color="gray" size={36}/>
+        <ActivityIndicator style={styles.load} color="gray" size={36}/>
+      <Text style={styles.loading}>Loading...</Text>
       </View>
     )
   }
@@ -72,5 +73,12 @@ const styles = StyleSheet.create({
   primaryText: {
     margin: 20,
     fontSize: 28
+},
+load:{
+  marginTop:1000
+},
+loading:{
+  textAlign:"center",
+  fontSize:36
 }
 });
