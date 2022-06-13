@@ -1,9 +1,9 @@
 import React,{useState,useEffect} from 'react'
 import { View,Text,StyleSheet,ImageBackground,Dimensions,StatusBar } from 'react-native'
-import { SearchBar } from './searchbar'
+import  {SearchBar}  from './searchbar'
 import { haze,rainy,snow,sunny } from '../assets/backgroundImage/index'
 
-export const Weather=({weatherData}) =>{
+export const Weather=({weatherData,fetchWeatherData}) =>{
     const [backgroundImage,setBackgroundImage]=useState(null)
     const {weather,name,
       main:{temp,humidity},
@@ -33,7 +33,7 @@ export const Weather=({weatherData}) =>{
       style={styles.backgroundImg}
       resizeMode="cover"
       >
-        <SearchBar/>
+        <SearchBar fetchWeatherData={fetchWeatherData}/>
       
       <View style={{alignItems:"center"}}>
         <Text style={{...styles.headerText,color:textColor,fontWeight:"bold",fontSize:46}}>{name}</Text>

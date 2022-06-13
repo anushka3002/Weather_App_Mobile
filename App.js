@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { ActivityIndicator } from 'react-native-web';
 import { Weather } from './components/weather';
+import { SearchBar } from './components/searchbar';
 
 
 const API_KEY="b7bd8afb5b725f099b164281e741a4b0"
@@ -16,7 +17,7 @@ export default function App() {
 
 
   const fetchWeatherData=(city)=>{
-    // setLoaded(false)
+    setLoaded(false)
       const API=`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
     axios.get(API).then((res)=>{
       if(res.status===200){
@@ -34,14 +35,8 @@ export default function App() {
 
   useEffect(()=>{
     fetchWeatherData("Mumbai")
-    console.log(weatherData)
-    console.log("hello")
   },[])
 
- 
-  // const handleChange=(e)=>{
-  //   setCity(e.target.value)
-  // }
 
   if(!loaded){
     return(
@@ -52,14 +47,17 @@ export default function App() {
   }
   else if(weatherData===null){
     return(
-      <View></View>
+      <View>
+        <SearchBar fetchWeatherData={fetchWeatherData}/>
+        <Text style={styles.primaryText}>City Not Found! Try Different City</Text>
+      </View>
     )
     
   }
 
   return (
     <View style={styles.container}>
-      <Weather weatherData={weatherData}/>
+      <Weather weatherData={weatherData} fetchWeatherData={fetchWeatherData}/>
     </View>
   );
 }
@@ -71,4 +69,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  primaryText: {
+    margin: 20,
+    fontSize: 28
+}
 });
