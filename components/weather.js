@@ -28,6 +28,7 @@ export const Weather=({weatherData,fetchWeatherData}) =>{
 
   return (
     <View style={styles.container}>
+      <StatusBar backgroundColor="darkgray"/>
       <ImageBackground
       source={backgroundImage}
       style={styles.backgroundImg}
