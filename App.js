@@ -104,6 +104,7 @@ export default function App() {
             const response = await fetch(API);
             if(response.status == 200) {
                 const data = await response.json();
+                console.log(data)
                 setWeatherData(data);
             } else {
                 setWeatherData(null);
